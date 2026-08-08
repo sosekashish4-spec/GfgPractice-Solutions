@@ -11,14 +11,18 @@ class Node {
 }*/
 
 class Solution {
+    static boolean ans;
+    public boolean isBalanced(Node root) {
+        ans=true;
+        level(root);
+        return ans;
+    }
     public int level(Node root){
         if(root==null) return 0;
-        return 1+Math.max(level(root.left),level(root.right));
-    }
-    public boolean isBalanced(Node root) {
-        if(root==null) return true;
-         int m=Math.abs(level(root.left)-level(root.right));
-         if(m>1) return false;
-         return isBalanced(root.left) && isBalanced(root.right);
+        int l=level(root.left);
+        int r=level(root.right);
+        int dif=Math.abs(l-r);
+        if(dif>1) ans=false;
+        return 1+(Math.max(l,r));
     }
 }
